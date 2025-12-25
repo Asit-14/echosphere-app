@@ -87,14 +87,18 @@ export function MessageBubble({ message, isOwn, showAvatar, senderName, onDelete
             
             {message.type === 'image' && message.attachments && message.attachments.length > 0 && (
                <div className="rounded-lg overflow-hidden my-1">
-                  {message.attachments.map((att, i) => (
-                    <img 
-                      key={i} 
-                      src={att.url.startsWith('http') ? att.url : `http://localhost:8000${att.url}`} 
-                      alt="Attachment" 
-                      className="max-w-full h-auto mb-1 last:mb-0 rounded" 
-                    />
-                  ))}
+                  {message.attachments.map((att, i) => {
+                    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+                    const src = att.url.startsWith('http') ? att.url : `${baseUrl}${att.url}`;
+                    return (
+                      <img 
+                        key={i} 
+                        src={src} 
+                        alt="Attachment" 
+                        className="max-w-full h-auto mb-1 last:mb-0 rounded" 
+                      />
+                    );
+                  })}
                   {message.content && message.content !== 'Image' && <p className="mt-1">{message.content}</p>}
                </div>
             )}
@@ -103,7 +107,7 @@ export function MessageBubble({ message, isOwn, showAvatar, senderName, onDelete
                <div className="flex items-center gap-2 min-w-[200px] py-1">
                   <audio 
                     controls 
-                    src={message.attachments[0].url.startsWith('http') ? message.attachments[0].url : `http://localhost:8000${message.attachments[0].url}`} 
+                    src={message.attachments[0].url.startsWith('http') ? message.attachments[0].url : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}${message.attachments[0].url}`} 
                     className="w-full h-8" 
                   />
                </div>
