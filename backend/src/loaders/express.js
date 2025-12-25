@@ -12,6 +12,9 @@ import { env } from "../config/env.js";
 
 const app = express();
 
+// Trust Proxy for Render/Vercel (Required for Rate Limiting)
+app.set("trust proxy", 1);
+
 // Static files
 app.use('/uploads', express.static(path.join(process.cwd(), 'public/uploads')));
 app.use(express.static("public"));
