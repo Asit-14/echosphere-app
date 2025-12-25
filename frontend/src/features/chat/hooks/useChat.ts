@@ -21,7 +21,8 @@ export function useChat() {
   useEffect(() => {
     if (!user) return;
 
-    const socket = io(import.meta.env.VITE_API_URL || 'http://localhost:8000', {
+    const SOCKET_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+    const socket = io(SOCKET_URL, {
       auth: { token: localStorage.getItem('accessToken') },
     });
     socketRef.current = socket;
