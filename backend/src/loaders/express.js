@@ -82,6 +82,16 @@ import userRouter from "../routes/user.routes.js";
 import chatRouter from "../routes/chat.routes.js";
 import messageRouter from "../routes/message.routes.js";
 
+// Root Route
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "EchoSphere API is running",
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.use("/api/health", healthRouter);
 app.use("/api/v1/health", healthRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
