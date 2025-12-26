@@ -8,7 +8,8 @@ export default function OAuthCallbackPage() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const code = searchParams.get("code");
+    const accessToken = searchParams.get("accessToken");
+    const refreshToken = searchParams.get("refreshToken");
     const error = searchParams.get("error");
 
     if (error) {
@@ -17,13 +18,18 @@ export default function OAuthCallbackPage() {
       return;
     }
 
-    if (code) {
-      // Simulate token exchange
-      setTimeout(() => {
-        toast.success("Successfully authenticated!");
-        navigate("/chat");
-      }, 1500);
+    if (accessToken && refreshToken) {
+      // Store tokens
+      localStorage.setItem("accessToken", accessToken);
+      // Note: Refresh token should ideally be in an HTTP-only cookie, 
+      // but if the backend sends it in URL (as per current implementation), we store it.
+      // If backend sets cookie, this might be redundant but harmless.
+      
+      toast.success("Successfully authenticated!");
+      // Force reload to ensure AuthContext picks up the new token
+      window.location.href = "/chat";
     } else {
+      // If no tokens found, redirect to login
       navigate("/login");
     }
   }, [navigate, searchParams]);

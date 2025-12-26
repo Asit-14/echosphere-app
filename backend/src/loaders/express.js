@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import { stream } from "../utils/logger.js";
 import { env } from "../config/env.js";
+import passport from "passport";
+import "../config/passport.js"; // Import passport config
 
 const app = express();
 
@@ -42,6 +44,9 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-id', 'ip']
 }));
+
+// Initialize Passport
+app.use(passport.initialize());
 
 // Rate Limiting
 const limiter = rateLimit({

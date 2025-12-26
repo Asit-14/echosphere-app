@@ -30,6 +30,20 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+    password: {
+      type: String,
+      required: function() { return this.provider === 'local'; }
+    },
+    provider: {
+      type: String,
+      enum: ["local", "google", "github"],
+      default: "local",
+    },
+    providerId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
     phone: {
       type: String,
       unique: true,

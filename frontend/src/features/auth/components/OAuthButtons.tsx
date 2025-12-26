@@ -7,8 +7,8 @@ interface OAuthButtonsProps {
 
 export function OAuthButtons({ isLoading }: OAuthButtonsProps) {
   const handleOAuthLogin = (provider: 'github' | 'google') => {
-    // In a real app, this would redirect to the backend OAuth endpoint
-    window.location.href = `${import.meta.env.VITE_API_URL}/auth/${provider}`;
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+    window.location.href = `${API_BASE_URL}/api/v1/auth/${provider}`;
   };
 
   return (

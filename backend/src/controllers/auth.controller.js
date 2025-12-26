@@ -155,6 +155,23 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, req.user, "Current user fetched successfully"));
 });
 
+const handleOAuthCallback = asyncHandler(async (req, res) => {
+  const user = req.user;
+  const ip = req.ip;
+  const deviceId = req.headers["user-agent"];
+
+  const { accessToken, refreshToken } = await authService.generateAccessAndRefreshTokens(
+    user._id,
+    { ip, deviceId }
+  );
+
+  // Redirect to frontend with tokens
+  // In production, consider using a secure cookie or a temporary code exchange
+  const redirectUrl = `${env.CLIENT_URL}/auth/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`;
+  
+  res.redirect(redirectUrl);
+});
+
 export {
   registerUser,
   loginUser,
@@ -164,4 +181,5 @@ export {
   verify2FA,
   disable2FA,
   getCurrentUser,
+  handleOAuthCallback,
 };

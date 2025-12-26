@@ -39,7 +39,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/auth/2fa" element={<TwoFactorPage />} />
-                <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
+                <Route path="/auth/callback" element={<OAuthCallbackPage />} />
                 
                 {/* Protected Routes */}
                 <Route element={<AuthGuard />}>
