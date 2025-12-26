@@ -38,7 +38,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
         </p>
         <div className="group cursor-default">
           <h3 className="text-xl font-medium bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105 origin-right">
-            Developer
+            Asit Kumar
           </h3>
           <div className="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-primary via-purple-500 to-pink-500 transition-all duration-500 ease-out ml-auto" />
         </div>
