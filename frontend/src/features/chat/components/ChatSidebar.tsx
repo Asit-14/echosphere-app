@@ -13,8 +13,8 @@ interface ChatSidebarProps {
 
 export function ChatSidebar({ conversations, activeId, onSelect, isLoading }: ChatSidebarProps) {
   return (
-    <div className="flex flex-col h-full border-r border-border bg-card/30">
-      <div className="p-4 space-y-4">
+    <div className="flex flex-col h-full border-r border-border bg-card/30 w-full md:w-auto">
+      <div className="p-4 space-y-4 shrink-0">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold tracking-tight">Messages</h2>
           <Button size="icon" variant="ghost" className="h-8 w-8">
