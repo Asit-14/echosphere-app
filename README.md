@@ -1,4 +1,4 @@
-# EchoSphere
+# EchoSphere(Chat Application)
 
 A robust, real-time communication platform designed for seamless interaction across all devices.
 
